@@ -36,6 +36,7 @@ public class Blocks {
         // i2 not visible in the parent block
         //System.out.println("outside the block i2=" + i2);
 
-
+        int i4 = 9 % 2;
+        System.out.println(i4);
     }
 }
