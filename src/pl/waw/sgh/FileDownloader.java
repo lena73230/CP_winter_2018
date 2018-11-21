@@ -16,6 +16,6 @@ public class FileDownloader {
 
     public static void main(String[] args) throws IOException {
         //download("https://query1.finance.yahoo.com/v7/finance/download/MSFT?period1=1539514461&period2=1542196461&interval=1d&events=history&crumb=IlQIFCSo5vE","MSFT.csv");
-        download("https://stooq.pl/q/d/l/?s=msft.us&i=d","MSFT.csv");
+        download("https://stooq.pl/q/d/l/?s=msft.us&i=d", "c:\\temp\\MSFT.csv");
     }
 }
