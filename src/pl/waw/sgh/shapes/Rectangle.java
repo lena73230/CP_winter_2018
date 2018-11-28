@@ -6,6 +6,7 @@ public class Rectangle extends Shape {
         super(parA, parB);
     }
 
+    @Override
     public double calculateSurface() {
         return parA * parB;
     }
