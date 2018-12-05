@@ -29,6 +29,14 @@ public abstract class Account {
         this.customer = customer;
     }
 
+    public void deposit(Double amount) {
+        this.balance = balance.add(new BigDecimal(amount));
+    }
+
+    public void charge(Double amount) {
+        balance = balance.subtract(new BigDecimal(amount));
+    }
+
     public Integer getAccountID() {
         return accountID;
     }

@@ -39,6 +39,19 @@ public class Bank {
         return acc;
     }
 
+    private Account findAccountByID(Integer accID) {
+        for (Account acc : accList) {
+            if (acc.getAccountID().equals(accID))
+                return acc;
+        }
+        return null;
+    }
+
+    public void transfer(Integer fromAccID, Integer toAccID, Double amount) {
+        // TODO: implement the transfer
+
+    }
+
     @Override
     public String toString() {
         return "Bank{" +
