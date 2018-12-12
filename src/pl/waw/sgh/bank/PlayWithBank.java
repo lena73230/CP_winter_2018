@@ -22,6 +22,6 @@ public class PlayWithBank {
         bank.transfer(100, 102, 50.00);
 
         System.out.println(bank);
-
+        //System.exit(-2);
     }
 }
