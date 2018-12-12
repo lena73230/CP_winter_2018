@@ -1,0 +1,8 @@
+For January!
+Please implement bank.transfer logic
+- in case there is not enough money, the transfer method should search through
+other accounts that belong to the same customer and if it finds one that contains enough money
+perform the transfer and displaying a warning to the user.
+
+You might need to implement a helper method "findAccountsByCustomer" that will return
+a list of accounts that belong to the same customer.

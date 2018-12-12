@@ -1,0 +1,5 @@
+Using the GUI Form editor built into IntelliJ IDEA
+please create a form that would allow to edit the data of a customer and his accounts.
+
+Please Note!!! No coding!!!, just design the form/forms. We will add the code during our next class!
+
