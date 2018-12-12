@@ -33,8 +33,12 @@ public abstract class Account {
         this.balance = balance.add(new BigDecimal(amount));
     }
 
-    public void charge(Double amount) {
-        balance = balance.subtract(new BigDecimal(amount));
+    public void charge(Double amount) throws NotEnoughMoneyException {
+        BigDecimal newBal = balance.subtract(new BigDecimal(amount));
+        if (newBal.compareTo(new BigDecimal(0)) < 0) {
+            throw new NotEnoughMoneyException(balance);
+        }
+        balance = newBal;
     }
 
     public Integer getAccountID() {

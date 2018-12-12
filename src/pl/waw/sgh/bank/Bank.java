@@ -47,9 +47,12 @@ public class Bank {
         return null;
     }
 
-    public void transfer(Integer fromAccID, Integer toAccID, Double amount) {
-        // TODO: implement the transfer
-
+    public void transfer(Integer fromAccID, Integer toAccID,
+                         Double amount) throws NotEnoughMoneyException {
+        Account fromAcc = findAccountByID(fromAccID);
+        Account toAcc = findAccountByID(toAccID);
+        fromAcc.charge(amount);
+        toAcc.deposit(amount);
     }
 
     @Override
