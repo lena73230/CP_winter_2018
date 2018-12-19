@@ -14,6 +14,7 @@ public class ExampleUI {
     protected JButton prevButton;
     protected JButton nextButton;
     protected JButton saveButton;
+    protected JButton deleteButton;
 
     protected void createUIComponents() {
         // TODO: place custom component creation code here
