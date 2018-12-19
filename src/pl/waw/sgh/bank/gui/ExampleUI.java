@@ -1,16 +1,18 @@
 package pl.waw.sgh.bank.gui;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class ExampleUI {
-    private JPanel panel1;
-    private JButton addNewCustomerButton;
-    private JFormattedTextField formattedTextField1;
-    private JFormattedTextField formattedTextField2;
-    private JFormattedTextField formattedTextField3;
-    private JButton goToAccountActivitiesButton;
+    protected JPanel customerMainPanel;
+    protected JButton addNewCustomerButton;
+    protected JFormattedTextField formattedTextField1;
+    protected JFormattedTextField formattedTextField2;
+    protected JFormattedTextField formattedTextField3;
+    protected JButton goToAccountActivitiesButton;
 
-    private void createUIComponents() {
+    protected void createUIComponents() {
         // TODO: place custom component creation code here
     }
+
 }
