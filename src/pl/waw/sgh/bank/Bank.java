@@ -55,6 +55,44 @@ public class Bank {
         toAcc.deposit(amount);
     }
 
+    public Customer findCustomerByID(Integer curCustID) {
+        for (Customer cust : custList) {
+            if (cust.getCustomerID().equals(curCustID))
+                return cust;
+        }
+        return null;
+    }
+
+    private int findCurCustIdx(Integer curCustID) {
+        for (Customer cust : custList) {
+            if (cust.getCustomerID().equals(curCustID))
+                return custList.indexOf(cust);
+        }
+        return -1;
+    }
+
+    public void removeCustomer(Integer custToRemoveID) {
+        int custToRemoveIdx = findCurCustIdx(custToRemoveID);
+        custList.remove(custToRemoveIdx);
+    }
+
+    public Customer getPrevCustomer(Integer curCustID) {
+        int curCustIdx = findCurCustIdx(curCustID);
+        if (curCustIdx > 0)
+            return custList.get(curCustIdx - 1);
+        else
+            return null;
+    }
+
+    public Customer getNextCustomer(Integer curCustID) {
+        int curCustIdx = findCurCustIdx(curCustID);
+        if (curCustIdx < custList.size() - 1)
+            return custList.get(curCustIdx + 1);
+        else
+            return null;
+    }
+
+
     @Override
     public String toString() {
         return "Bank{" +
