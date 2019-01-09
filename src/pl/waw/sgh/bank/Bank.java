@@ -47,6 +47,15 @@ public class Bank {
         return null;
     }
 
+    public List<Account> findAccountsByCustomer(Customer customer) {
+        List<Account> newAccList = new ArrayList<>();
+        for (Account acc : accList) {
+            if (acc.getCustomer().equals(customer))
+                newAccList.add(acc);
+        }
+        return newAccList;
+    }
+
     public void transfer(Integer fromAccID, Integer toAccID,
                          Double amount) throws NotEnoughMoneyException {
         Account fromAcc = findAccountByID(fromAccID);

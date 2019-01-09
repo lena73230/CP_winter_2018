@@ -38,7 +38,29 @@ public class ExampleLogic extends ExampleUI {
             }
         });
         JMenuItem newSavingsAccount = new JMenuItem("New Savings Account");
+        newSavingsAccount.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (curCust == null) {
+                    JOptionPane.showMessageDialog(null, "Current customer is not set");
+                    return;
+                }
+                Account newAcc = bank.newAccount(curCust, "Savings");
+                accountsTableModel.addRow(newAcc);
+            }
+        });
         JMenuItem newCheckingAccount = new JMenuItem("New Checking Account");
+        newCheckingAccount.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if (curCust == null) {
+                    JOptionPane.showMessageDialog(null, "Current customer is not set");
+                    return;
+                }
+                Account newAcc = bank.newAccount(curCust, "Checking");
+                accountsTableModel.addRow(newAcc);
+            }
+        });
         contextMenu.add(newDebitAccount);
         contextMenu.add(newSavingsAccount);
         contextMenu.add(newCheckingAccount);
@@ -77,6 +99,7 @@ public class ExampleLogic extends ExampleUI {
                 lastNameTextField.setText("");
                 emailTextField.setText("");
                 customerIDLabel.setText("NEW");
+                accountsTableModel.clearTable();
             }
         });
         saveButton.addActionListener(new ActionListener() {
@@ -144,6 +167,9 @@ public class ExampleLogic extends ExampleUI {
         lastNameTextField.setText(cust.getLastName());
         emailTextField.setText(cust.getEmail());
         customerIDLabel.setText(cust.getCustomerID().toString());
+        // Clear and fill the accounts table
+        accountsTableModel.clearTable();
+        accountsTableModel.addRows(bank.findAccountsByCustomer(cust));
     }
 
     public JPanel getCustomerMainPanel() {
