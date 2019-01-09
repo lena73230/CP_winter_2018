@@ -40,56 +40,69 @@ public class Bank {
         return acc;
     }
 
-    private Account findAccountByID(Integer accID) {
+    private Account findAccountByID(Integer accID) throws NonExistingAccountException {
         for (Account acc : accList) {
-            if (acc.getAccountID().equals(accID))
+            if (acc.getAccountID().equals(accID)) {
                 return acc;
-        }
-        return null;
-    }
-
-    public void transfer(Integer fromAccID, Integer toAccID,
-                         Double amount) throws NotEnoughMoneyException {
-        Account fromAcc = findAccountByID(fromAccID);
-        Account toAcc = findAccountByID(toAccID);
-        fromAcc.charge(amount);
-        toAcc.deposit(amount);
-    }
-
-
-
-
-
-
-
-
-
-   // public List<Customer> findAccountsByCustomer(Integer curCustID) {
-   //     return custList;
-    //}
-
-
-   // private List<pl.waw.sgh.Account> accList = new ArrayList<>();
-
-    //private Integer lastCustID = 0;
-
-//
-
-
-    public List<BigDecimal> findAccountsByCustomer (Integer customerID)
-    {
-        List list = new ArrayList<Account>();
-
-        for (Account acc : accList) {
-            Customer cust = acc.getCustomer();
-
-            if (cust.getCustomerID() == customerID) {
-                list.add(acc.getAccountID());
-                list.add(acc.getBalance());
             }
         }
-        return list;
+        throw new NonExistingAccountException(accID);
     }
+
+    private ArrayList<Account> findAccountsByCustomer(Customer customer) {
+        ArrayList<Account> customerAccList = new ArrayList<Account>();
+        for (Account acc : accList) {
+            if (acc.getCustomer().equals(customer)) {
+                customerAccList.add(acc);
+            }
+        }
+        return customerAccList;
+    }
+
+
+    public void transfer(Integer fromAccID, Integer toAccID,
+                         Double amount) throws NotEnoughMoneyException, NonExistingAccountException {
+        Account fromAcc = findAccountByID(fromAccID);
+        Account toAcc = findAccountByID(toAccID);
+        try {
+            fromAcc.charge(amount);
+            toAcc.deposit(amount);
+        } catch (NotEnoughMoneyException e) {
+            ArrayList<Account> customerAccList = findAccountsByCustomer(fromAcc.getCustomer());
+            for (Account acc : customerAccList) {
+                if (acc.getBalance().compareTo(BigDecimal.valueOf(amount)) >= 0) {
+                    acc.charge(amount);
+                    toAcc.deposit(amount);
+                    return;
+                }
+            }
+            throw new NotEnoughMoneyException("There is not enough money on either of your accounts");
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

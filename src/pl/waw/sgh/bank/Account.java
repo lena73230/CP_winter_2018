@@ -1,8 +1,6 @@
 package pl.waw.sgh.bank;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 
 public abstract class Account {
 
