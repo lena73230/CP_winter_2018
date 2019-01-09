@@ -1,5 +1,6 @@
 package pl.waw.sgh.bank;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,6 +55,50 @@ public class Bank {
         fromAcc.charge(amount);
         toAcc.deposit(amount);
     }
+
+
+
+
+
+
+
+
+
+   // public List<Customer> findAccountsByCustomer(Integer curCustID) {
+   //     return custList;
+    //}
+
+
+   // private List<pl.waw.sgh.Account> accList = new ArrayList<>();
+
+    //private Integer lastCustID = 0;
+
+//
+
+
+    public List<BigDecimal> findAccountsByCustomer (Integer customerID)
+    {
+        List list = new ArrayList<Account>();
+
+        for (Account acc : accList) {
+            Customer cust = acc.getCustomer();
+
+            if (cust.getCustomerID() == customerID) {
+                list.add(acc.getAccountID());
+                list.add(acc.getBalance());
+            }
+        }
+        return list;
+    }
+
+
+
+
+
+
+
+
+
 
     public Customer findCustomerByID(Integer curCustID) {
         for (Customer cust : custList) {

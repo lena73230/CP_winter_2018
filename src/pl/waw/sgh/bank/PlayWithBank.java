@@ -1,5 +1,7 @@
 package pl.waw.sgh.bank;
 
+import java.math.BigDecimal;
+
 public class PlayWithBank {
 
     public static void main(String[] args) /*throws NotEnoughMoneyException */ {
@@ -26,6 +28,34 @@ public class PlayWithBank {
 
             System.out.println(bank);
         } catch (NotEnoughMoneyException e) {
+
+
+            for (int i=1; i<=bank.findAccountsByCustomer(0).size(); i=i+2){
+                BigDecimal balances =bank.findAccountsByCustomer(0).get(i);
+                BigDecimal am = new BigDecimal(200);
+
+                while(!(balances.compareTo(am)>0)){
+
+                }
+
+               System.out.println(balances.compareTo(am)>0);
+
+
+
+                System.out.println(balances);
+
+
+            }
+
+
+
+
+
+
+            System.out.println(bank.findAccountsByCustomer(0));
+
+
+
             System.out.println(e.getMessage());
         }
         //System.exit(-2);
