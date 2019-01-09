@@ -10,5 +10,7 @@ public class Main {
         System.out.println("Test");
 
         System.out.println("\uD83D\udc18");
+
+
     }
 }
