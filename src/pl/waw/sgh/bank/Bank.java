@@ -1,5 +1,6 @@
 package pl.waw.sgh.bank;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +38,10 @@ public class Bank {
         }
         accList.add(acc);
         return acc;
+    }
+
+    public void deleteAccount(Account accToDel) {
+        accList.remove(accToDel);
     }
 
     private Account findAccountByID(Integer accID) {
@@ -81,6 +86,13 @@ public class Bank {
     }
 
     public void removeCustomer(Integer custToRemoveID) {
+        Customer custToDel = findCustomerByID(custToRemoveID);
+        List<Account> accOfCustToDel = findAccountsByCustomer(custToDel);
+        if (!accOfCustToDel.isEmpty()) {
+            JOptionPane.showMessageDialog(null,
+                    "Customer has accounts and therefore cannot be deleted");
+            return;
+        }
         int custToRemoveIdx = findCurCustIdx(custToRemoveID);
         custList.remove(custToRemoveIdx);
     }

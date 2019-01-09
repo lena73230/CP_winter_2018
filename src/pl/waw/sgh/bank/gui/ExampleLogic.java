@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.ParseException;
+import java.util.Arrays;
 
 public class ExampleLogic extends ExampleUI {
 
@@ -61,9 +62,26 @@ public class ExampleLogic extends ExampleUI {
                 accountsTableModel.addRow(newAcc);
             }
         });
+        JMenuItem deleteAccount = new JMenuItem("Delete Account");
+        deleteAccount.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                int[] accRowsToDel = accTable.getSelectedRows();
+                System.out.println("rows to delete:" + Arrays.toString(accRowsToDel));
+                for (Integer row : accRowsToDel) {
+                    Account acc = accountsTableModel.getAccountByRow(row);
+                    bank.deleteAccount(acc);
+                }
+                // reload accounts for current customer
+                accountsTableModel.clearTable();
+                accountsTableModel.addRows(bank.findAccountsByCustomer(curCust));
+            }
+        });
+
         contextMenu.add(newDebitAccount);
         contextMenu.add(newSavingsAccount);
         contextMenu.add(newCheckingAccount);
+        contextMenu.add(deleteAccount);
         accTable.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
@@ -152,6 +170,7 @@ public class ExampleLogic extends ExampleUI {
                     Customer prevCust = bank.getPrevCustomer(curCustID);
                     bank.removeCustomer(curCustID);
                     if (prevCust != null) displayCustomer(prevCust);
+                    //else displayCustomer(new Customer());
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(mainWindow, "This customer is not saved yet!");
                 }

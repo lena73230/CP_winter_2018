@@ -18,6 +18,10 @@ public class AccountsTableModel extends DefaultTableModel {
         super(cols, 0);
     }
 
+    public Account getAccountByRow(int row) {
+        return accountList.get(row);
+    }
+
     public void addRow(Account account) {
         accountList.add(account);
         addRow(getVectorFromAccount(account));
