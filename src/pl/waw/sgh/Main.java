@@ -8,5 +8,7 @@ public class Main {
             System.out.println("Arg: " + args[0] + " 2nd: " + args[1]);
         }
         System.out.println("Test");
+
+        System.out.println("\uD83D\udc18");
     }
 }
