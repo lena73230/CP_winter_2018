@@ -131,9 +131,9 @@ public class CustomerDao {
         //CustomerDao.getInstance().store(kl1);
         //CustomerDao.getInstance().store(kl2);
 
-        CustomerDao.getInstance().delete(3);
+        //CustomerDao.getInstance().delete(3);
 
-        CustomerDao.getInstance().update(4, "Joanne", "D'Arch", "email");
+        CustomerDao.getInstance().update(4, "Joanne", "D'Arc", "email");
 
         System.out.println("Retrieving customers");
         List<Customer> customers = CustomerDao.getInstance().retrieveCustomers();
