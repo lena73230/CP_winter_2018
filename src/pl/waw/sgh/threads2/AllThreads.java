@@ -15,8 +15,10 @@ public class AllThreads {
     public static void main(String[] args) {
         AllThreads allThreads = new AllThreads();
         MyThread[] myThreads = new MyThread[NUM_THREADS];
+        Thread prevThread = null;
         for (int i = 0; i < NUM_THREADS; i++) {
-            myThreads[i] = new MyThread("T_" + i, allThreads);
+            myThreads[i] = new MyThread("T_" + i, allThreads, prevThread);
+            prevThread = myThreads[i];
         }
         for (int i = 0; i < NUM_THREADS; i++) {
             myThreads[i].start();
