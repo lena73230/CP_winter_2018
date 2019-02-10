@@ -1,6 +1,6 @@
 package pl.waw.sgh.bank;
 
-import java.math.BigDecimal;
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,78 +40,34 @@ public class Bank {
         return acc;
     }
 
-    private Account findAccountByID(Integer accID) throws NonExistingAccountException {
+    public void deleteAccount(Account accToDel) {
+        accList.remove(accToDel);
+    }
+
+    private Account findAccountByID(Integer accID) {
         for (Account acc : accList) {
-            if (acc.getAccountID().equals(accID)) {
+            if (acc.getAccountID().equals(accID))
                 return acc;
-            }
         }
-        throw new NonExistingAccountException(accID);
+        return null;
     }
 
-    private ArrayList<Account> findAccountsByCustomer(Customer customer) {
-        ArrayList<Account> customerAccList = new ArrayList<Account>();
+    public List<Account> findAccountsByCustomer(Customer customer) {
+        List<Account> newAccList = new ArrayList<>();
         for (Account acc : accList) {
-            if (acc.getCustomer().equals(customer)) {
-                customerAccList.add(acc);
-            }
+            if (acc.getCustomer().equals(customer))
+                newAccList.add(acc);
         }
-        return customerAccList;
+        return newAccList;
     }
-
 
     public void transfer(Integer fromAccID, Integer toAccID,
-                         Double amount) throws NotEnoughMoneyException, NonExistingAccountException {
+                         Double amount) throws NotEnoughMoneyException {
         Account fromAcc = findAccountByID(fromAccID);
         Account toAcc = findAccountByID(toAccID);
-        try {
-            fromAcc.charge(amount);
-            toAcc.deposit(amount);
-        } catch (NotEnoughMoneyException e) {
-            ArrayList<Account> customerAccList = findAccountsByCustomer(fromAcc.getCustomer());
-            for (Account acc : customerAccList) {
-                if (acc.getBalance().compareTo(BigDecimal.valueOf(amount)) >= 0) {
-                    acc.charge(amount);
-                    toAcc.deposit(amount);
-                    return;
-                }
-            }
-            throw new NotEnoughMoneyException("There is not enough money on either of your accounts");
-        }
+        fromAcc.charge(amount);
+        toAcc.deposit(amount);
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public Customer findCustomerByID(Integer curCustID) {
         for (Customer cust : custList) {
@@ -130,6 +86,13 @@ public class Bank {
     }
 
     public void removeCustomer(Integer custToRemoveID) {
+        Customer custToDel = findCustomerByID(custToRemoveID);
+        List<Account> accOfCustToDel = findAccountsByCustomer(custToDel);
+        if (!accOfCustToDel.isEmpty()) {
+            JOptionPane.showMessageDialog(null,
+                    "Customer has accounts and therefore cannot be deleted");
+            return;
+        }
         int custToRemoveIdx = findCurCustIdx(custToRemoveID);
         custList.remove(custToRemoveIdx);
     }
